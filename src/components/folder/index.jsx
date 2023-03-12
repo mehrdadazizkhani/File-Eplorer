@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   VscChevronDown,
   VscChevronRight,
@@ -10,14 +10,13 @@ import {
   VscCheck,
   VscFolderOpened,
 } from "react-icons/vsc";
-
 import Directory from "../directory";
-const FolderComponent = ({ titleProp, childrens, id }) => {
-  const [path, setPath] = useState("" + id);
+
+const FolderComponent = ({ titleProp, childrens, pathId }) => {
   const [visible, setVisible] = useState(true);
   const [collapse, setCollpase] = useState(false);
   const [title, setTitle] = useState(titleProp);
-  const [showOptions, setShowOptions] = useState(false);
+  const [showOptions, setShowOptions] = useState(true);
   const [edit, setEdit] = useState(false);
 
   const handleEdit = (e) => {
@@ -30,15 +29,7 @@ const FolderComponent = ({ titleProp, childrens, id }) => {
 
   return (
     visible && (
-      <div
-        onMouseEnter={() => {
-          setShowOptions(true);
-        }}
-        onMouseLeave={() => {
-          !edit && setShowOptions(false);
-        }}
-        className="ml-0.5 w-full cursor-pointer"
-      >
+      <div className="ml-2 w-full cursor-pointer">
         <div className="flex w-full items-center justify-between">
           <div
             onClick={() => {
@@ -47,9 +38,9 @@ const FolderComponent = ({ titleProp, childrens, id }) => {
             className="flex w-full items-center gap-2"
           >
             {collapse ? (
-              <VscChevronDown size={25} />
+              <VscChevronDown size={15} />
             ) : (
-              <VscChevronRight size={25} />
+              <VscChevronRight size={15} />
             )}
             {collapse ? <VscFolderOpened /> : <VscFolder />}
             {edit ? (
@@ -63,7 +54,9 @@ const FolderComponent = ({ titleProp, childrens, id }) => {
             ) : (
               <div>
                 {title}
-                <span>{path}</span>
+                <span className="ml-3 text-xs text-red-600">
+                  path: <span className="text-gray-400"> {pathId}</span>
+                </span>
               </div>
             )}
           </div>
@@ -97,11 +90,14 @@ const FolderComponent = ({ titleProp, childrens, id }) => {
           </div>
         </div>
         <div
-          className={`ml-3 flex flex-col overflow-hidden border-l border-slate-600 pl-2 ${
+          className={`ml-2 flex flex-col overflow-hidden border-l border-slate-600 pl-2 ${
             collapse ? "h-fit" : "h-0"
           }`}
         >
-          {collapse && childrens.map((item) => <Directory files={item} />)}
+          {collapse &&
+            childrens.map((item, index) => (
+              <Directory files={item} key={index} />
+            ))}
         </div>
       </div>
     )

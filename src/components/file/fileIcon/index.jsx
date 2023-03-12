@@ -9,17 +9,17 @@ import {
 import { VscFile } from "react-icons/vsc";
 
 const FileIcon = ({ title }) => {
-  if (title.endsWith(".html")) {
+  if (title?.endsWith(".html")) {
     return <SiHtml5 className="text-orange-600" />;
-  } else if (title.endsWith(".css")) {
+  } else if (title?.endsWith(".css")) {
     return <SiCss3 className="text-blue-400" />;
-  } else if (title.endsWith(".js")) {
+  } else if (title?.endsWith(".js")) {
     return <SiJavascript className="text-yellow-400" />;
-  } else if (title.endsWith(".jsx")) {
+  } else if (title?.endsWith(".jsx")) {
     return <SiReact className="text-cyan-400" />;
-  } else if (title.endsWith(".ts")) {
+  } else if (title?.endsWith(".ts")) {
     return <SiTypescript className="text-blue-600" />;
-  } else if (title.startsWith(".gitignore")) {
+  } else if (title?.startsWith(".gitignore")) {
     return <SiGit className="text-orange-600" />;
   } else {
     return <VscFile />;

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useTree } from "../../context";
 import {
   VscNewFile,
   VscNewFolder,
@@ -6,16 +7,15 @@ import {
   VscChevronDown,
 } from "react-icons/vsc";
 import Directory from "../directory";
-import files from "../../files.json";
 
 const Main = () => {
   const [collapse, setCollpase] = useState(true);
-  const [data, setData] = useState();
+  const { data, handleAdd } = useTree();
+  const [nameInput, setNameInpu] = useState();
 
-  const handleNewFile = () => {};
   return (
     <main className="flex h-[calc(100vh-96px)]">
-      <aside className="h-full w-[450px] bg-slate-800 p-3">
+      <aside className="h-full w-[600px] bg-slate-800 p-3">
         <div className="flex h-10 w-full cursor-pointer items-center justify-between rounded-md bg-slate-700 p-2">
           <div
             onClick={() => {
@@ -37,17 +37,24 @@ const Main = () => {
             } h-full items-center justify-center gap-2 text-xl`}
           >
             <VscNewFile
+              onClick={() => handleAdd(false)}
               className="cursor-pointer hover:opacity-70"
-              onClick={handleNewFile}
             />
-            <VscNewFolder className="cursor-pointer hover:opacity-70" />
+            <VscNewFolder
+              onClick={() => handleAdd(true)}
+              className="cursor-pointer hover:opacity-70"
+            />
           </div>
         </div>
-        <div className={`overflow-hidden ${collapse ? "h-fit" : "h-0"}`}>
-          <Directory files={files} />
+        <div
+          className={`ml-2 overflow-x-hidden overflow-y-scroll scrollbar-thin scrollbar-thumb-slate-500 ${
+            collapse ? "h-[calc(100%-50px)]" : "h-0"
+          }`}
+        >
+          <Directory files={data} />
         </div>
       </aside>
-      <article className="h-full w-[calc(100%-450px)] bg-slate-900"></article>
+      <article className="h-full w-[calc(100%-600px)] bg-slate-900"></article>
     </main>
   );
 };
