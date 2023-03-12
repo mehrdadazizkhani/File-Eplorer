@@ -1,0 +1,73 @@
+{
+  "id": 0,
+  "name": "recursive-components-react",
+  "type": "folder",
+  "childrens": [
+    {
+      "id": 0,
+      "name": ".gitignore",
+      "type": "file"
+    },
+    {
+      "id": 1,
+      "name": "vite.config.js",
+      "type": "file"
+    },
+    {
+      "id": 2,
+      "name": "src",
+      "type": "folder",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "App.css",
+          "type": "file"
+        },
+        {
+          "id": 1,
+          "name": "App.jsx",
+          "type": "file"
+        },
+        {
+          "id": 2,
+          "name": "index.css",
+          "type": "file"
+        },
+        {
+          "id": 3,
+          "name": "main.jsx",
+          "type": "file"
+        },
+        {
+          "id": 4,
+          "name": "components",
+          "type": "folder",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "Checkbox.jsx",
+              "type": "file"
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "pages",
+          "type": "folder",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "Home.jsx",
+              "type": "file"
+            },
+            {
+              "id": 1,
+              "name": "About.jsx",
+              "type": "file"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
