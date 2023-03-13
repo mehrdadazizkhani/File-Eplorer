@@ -9,6 +9,7 @@ const Directory = () => {
     return;
   }
   return data.children.map((data) => {
+    console.log({ ...data });
     if (data.type === "folder") {
       return (
         <FolderComponent
@@ -19,8 +20,13 @@ const Directory = () => {
         />
       );
     } else {
-      console.log("file");
-      return <FileComponent titleProp={data?.name} />;
+      return (
+        <FileComponent
+          titleProp={data?.name}
+          key={data.pathId}
+          pathId={data?.pathId}
+        />
+      );
     }
   });
 };

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useTree } from "../../context";
 import {
   VscNewFile,
@@ -11,7 +11,6 @@ import Directory from "../directory";
 const Main = () => {
   const [collapse, setCollpase] = useState(true);
   const { data, handleAdd } = useTree();
-  const [nameInput, setNameInpu] = useState();
 
   return (
     <main className="flex h-[calc(100vh-96px)]">
@@ -47,7 +46,7 @@ const Main = () => {
           </div>
         </div>
         <div
-          className={`ml-2 overflow-x-hidden overflow-y-scroll scrollbar-thin scrollbar-thumb-slate-500 ${
+          className={`ml-2 overflow-y-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb-slate-500 ${
             collapse ? "h-[calc(100%-50px)]" : "h-0"
           }`}
         >

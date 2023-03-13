@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
+import { useTree } from "../../context";
 import {
   VscChevronDown,
   VscChevronRight,
@@ -18,6 +19,7 @@ const FolderComponent = ({ titleProp, childrens, pathId }) => {
   const [title, setTitle] = useState(titleProp);
   const [showOptions, setShowOptions] = useState(true);
   const [edit, setEdit] = useState(false);
+  const { data, handleAdd } = useTree();
 
   const handleEdit = (e) => {
     if (e.target.value) {
@@ -82,7 +84,12 @@ const FolderComponent = ({ titleProp, childrens, pathId }) => {
             )}
 
             <VscNewFile className="hover:opacity-70" />
-            <VscNewFolder className="hover:opacity-70" />
+            <VscNewFolder
+              onClick={() => {
+                handleAdd(true, pathId);
+              }}
+              className="hover:opacity-70"
+            />
             <VscTrash
               className="hover:opacity-70"
               onClick={() => setVisible(false)}
@@ -95,8 +102,8 @@ const FolderComponent = ({ titleProp, childrens, pathId }) => {
           }`}
         >
           {collapse &&
-            childrens.map((item, index) => (
-              <Directory files={item} key={index} />
+            childrens.map((item) => (
+              <Directory files={item} key={item.pathId} />
             ))}
         </div>
       </div>
