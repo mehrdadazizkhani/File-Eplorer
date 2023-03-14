@@ -1,34 +1,27 @@
-import { useTree } from "../../context";
 import FileComponent from "../file";
 import FolderComponent from "../folder";
 
-const Directory = () => {
-  const { data } = useTree();
-
-  if (!data.children.length) {
-    return;
+const Directory = ({ files }) => {
+  if (files.type === "folder") {
+    return (
+      <FolderComponent
+        key={files.pathId}
+        titleProp={files?.name}
+        childrens={files?.children}
+        pathId={files?.pathId}
+        isFirstTime={files.isFirstTime}
+      />
+    );
+  } else {
+    return (
+      <FileComponent
+        titleProp={files?.name}
+        key={files.pathId}
+        pathId={files?.pathId}
+        isFirstTime={files.isFirstTime}
+      />
+    );
   }
-  return data.children.map((data) => {
-    console.log({ ...data });
-    if (data.type === "folder") {
-      return (
-        <FolderComponent
-          key={data.pathId}
-          titleProp={data?.name}
-          childrens={data?.children}
-          pathId={data?.pathId}
-        />
-      );
-    } else {
-      return (
-        <FileComponent
-          titleProp={data?.name}
-          key={data.pathId}
-          pathId={data?.pathId}
-        />
-      );
-    }
-  });
 };
 
 export default Directory;

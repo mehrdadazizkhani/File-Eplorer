@@ -14,7 +14,7 @@ const Main = () => {
 
   return (
     <main className="flex h-[calc(100vh-96px)]">
-      <aside className="h-full w-[600px] bg-slate-800 p-3">
+      <aside className="relative h-full w-[600px] bg-slate-800 p-3">
         <div className="flex h-10 w-full cursor-pointer items-center justify-between rounded-md bg-slate-700 p-2">
           <div
             onClick={() => {
@@ -36,7 +36,9 @@ const Main = () => {
             } h-full items-center justify-center gap-2 text-xl`}
           >
             <VscNewFile
-              onClick={() => handleAdd(false)}
+              onClick={() => {
+                handleAdd(false);
+              }}
               className="cursor-pointer hover:opacity-70"
             />
             <VscNewFolder
@@ -46,14 +48,16 @@ const Main = () => {
           </div>
         </div>
         <div
-          className={`ml-2 overflow-y-scroll overflow-x-hidden scrollbar-thin scrollbar-thumb-slate-500 ${
+          className={`my-2 ml-2 overflow-y-scroll pr-3 overflow-x-hidden scrollbar-thin scrollbar-track-slate-900 scrollbar-thumb-cyan-600 ${
             collapse ? "h-[calc(100%-50px)]" : "h-0"
           }`}
         >
-          <Directory files={data} />
+          {data.children.map((child) => {
+            return <Directory files={child} key={child.pathId} />;
+          })}
         </div>
       </aside>
-      <article className="h-full w-[calc(100%-600px)] bg-slate-900"></article>
+      <article className="flex h-full w-[calc(100%-600px)] flex-col bg-slate-900 p-2"></article>
     </main>
   );
 };
